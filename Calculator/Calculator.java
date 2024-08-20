@@ -112,7 +112,12 @@ public class Calculator {
 				if(e.getSource()==negButton) {
 					double temp = Double.parseDouble(textField.getText());
 					temp *= -1;
-					textField.setText(String.valueOf(temp));
+					if(temp == (int) temp) {
+						textField.setText(String.valueOf((int)temp));
+					}
+					else {
+						textField.setText(String.valueOf(temp));
+					}
 				}
 				
 			});
