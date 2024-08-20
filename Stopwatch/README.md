@@ -1,1 +1,1 @@
-A Stopwatch that can start, stop, and reset countings.
+A stopwatch that can start, stop, and reset countings.
