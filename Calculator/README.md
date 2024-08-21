@@ -7,4 +7,4 @@ then will display '5' instead of '6'.
 # Calculator 2.0
 
 Can handle multiple operations with the correct operator precedence. For example, if pressing '1' '+' '2' '*' '3' '=', then will display '7' correctly.<br>
-Can also show an error message when encountering problems. For example, if pressing '1' '+' '+' '2', then will display 'Error!'.
+Can also show an error message when encountering problems. For example, if pressing '1' '+' '+' '2' '=', then will display 'Error!'.
