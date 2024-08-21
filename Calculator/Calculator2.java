@@ -111,78 +111,83 @@ public class Calculator2 implements ActionListener{
 
 
 	public double eval(String mathExpression) {
-	    return new Object() {
-	        int pos = -1, ch;
-	        
-	        void nextChar() {
-	            pos = pos + 1;
-	            if (pos < mathExpression.length()) {
-	            	ch = mathExpression.charAt(pos);
-	            }
-	            else {
-	            	ch = -1;
-	            }
-	        }
-	        
-	        boolean eat(int charToEat) {
-	            if (ch == charToEat) {
-	                nextChar();
-	                return true;
-	            }
-	            else
-	            	return false;
-	        }
-	        
-	        double parse() {
-	            nextChar();
-	            double result = parseAddSub();
-	            if (pos < mathExpression.length()) throw new RuntimeException("Unexpected: " + (char)ch);
-	            return result;
-	        }
-	        
-	        double parseAddSub() {
-	            double result = parseMulDiv();
-	            for (;;) {
-	                if (eat('+')) {
-	                	result += parseMulDiv();
-	                }
-	                else if (eat('-')) {
-	                	result -= parseMulDiv();
-	                }
-	                else 
-	                	return result;
-	            }
-	        }
-	        
-	        double parseMulDiv() {
-	            double result = parseNumber();
-	            for (;;) {
-	                if (eat('*')) { 
-	                	result *= parseNumber();
-	                }
-	                else if (eat('/')) {
-	                	result /= parseNumber();
-	                }
-	                else 
-	                	return result;
-	            }
-	        }
-	        
-	        double parseNumber() {
-	            double result;
-	            int startPos = this.pos;
-	            if ((ch >= '0' && ch <= '9') || ch == '.') { 
-	                while ((ch >= '0' && ch <= '9') || ch == '.') {
-	                	nextChar();
-	                }
-	                result = Double.parseDouble(mathExpression.substring(startPos, this.pos));
-	            } 
-	            else {
-	                throw new RuntimeException("Unexpected: " + (char)ch);
-	            }
-	            return result;
-	        }
-	    }.parse();
+	    try {
+	    	return new Object() {	    
+		        int pos = -1, ch;
+		        
+		        void nextChar() {
+		            pos = pos + 1;
+		            if (pos < mathExpression.length()) {
+		            	ch = mathExpression.charAt(pos);
+		            }
+		            else {
+		            	ch = -1;
+		            }
+		        }
+		        
+		        boolean eat(int charToEat) {
+		            if (ch == charToEat) {
+		                nextChar();
+		                return true;
+		            }
+		            else
+		            	return false;
+		        }
+		        
+		        double parse() {
+		            nextChar();
+		            double result = parseAddSub();
+		            if (pos < mathExpression.length()) throw new RuntimeException();
+		            return result;
+		        }
+		        
+		        double parseAddSub() {
+		            double result = parseMulDiv();
+		            for (;;) {
+		                if (eat('+')) {
+		                	result += parseMulDiv();
+		                }
+		                else if (eat('-')) {
+		                	result -= parseMulDiv();
+		                }
+		                else 
+		                	return result;
+		            }
+		        }
+		        
+		        double parseMulDiv() {
+		            double result = parseNumber();
+		            for (;;) {
+		                if (eat('*')) { 
+		                	result *= parseNumber();
+		                }
+		                else if (eat('/')) {
+		                	result /= parseNumber();
+		                }
+		                else 
+		                	return result;
+		            }
+		        }
+		        
+		        double parseNumber() {
+		            double result;
+		            int startPos = this.pos;
+		            if ((ch >= '0' && ch <= '9') || ch == '.') { 
+		                while ((ch >= '0' && ch <= '9') || ch == '.') {
+		                	nextChar();
+		                }
+		                result = Double.parseDouble(mathExpression.substring(startPos, this.pos));
+		            } 
+		            else {
+		                throw new RuntimeException();
+		            }
+		            return result;
+		        }
+		    }.parse();
+	    }
+	    catch (RuntimeException e)  {
+	    	return Double.NaN;	
+	    }
 	}
 	
 	@Override
@@ -223,11 +228,17 @@ public class Calculator2 implements ActionListener{
 				mathExpression += queue.poll();
 			}
 			result = this.eval(mathExpression);
-			if(result == (int) result) {
-				textField.setText(String.valueOf((int)result));
+			
+			if (Double.isNaN(result)) {
+	            textField.setText("Error!");
 			}
 			else {
-				textField.setText(String.valueOf(result));
+				if(result == (int) result) {
+					textField.setText(String.valueOf((int)result));
+				}
+				else {
+					textField.setText(String.valueOf(result));
+				}
 			}
 			mathExpression = "";
 		}
@@ -252,4 +263,3 @@ public class Calculator2 implements ActionListener{
 			}
 		}
 	}
-}
