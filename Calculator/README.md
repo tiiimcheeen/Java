@@ -15,4 +15,5 @@ Can show more detailed error messages.<br>
 If '=' is pressed without any values, then will display _Error: Input Required_.<br>
 If the expression is incomplete, e.g. '1' '+' '2' '+' '=', then will display _Error: No Operand After -_.<br>
 If an operator is wrongly placed, e.g. '1' '+' '/' '2' '=', then will display _Error: Invalid Char: -_.<br>
-If dividing by 0, then will display _Error: Division by Zero_.
+If dividing by 0, then will display _Error: Division by Zero_.<br>
+If an operand has more than 1 decimals, e.g. '1.2.3' '+' '2' '=', then will display _Error: Extra Decimals_.
