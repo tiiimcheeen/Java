@@ -4,7 +4,7 @@ This snake game is inspired by Bro Code. [Watch his tutorial here](https://www.y
 
 ## Key Improvement
 
-- **🚀 New Two-Player Mode**: Introduced a new exciting mode where two players can compete against each other! Player 1 uses **WASD** controls, while Player 2 uses **Arrow Keys**.
+- **🐍🐍 New Two-Player Mode**: Introduced a new exciting mode where two players can compete against each other! Player 1 uses **WASD** controls, while Player 2 uses **Arrow Keys**.
 
 ## Additional Improvements
 
